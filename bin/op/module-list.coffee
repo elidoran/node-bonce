@@ -6,7 +6,7 @@ module.exports = (basedir) ->
 
   nodeModulesDir = join basedir, 'node_modules'
 
-  # get the all file names in node_modules
+  # get all file names in node_modules
   moduleNames = fs.readdirSync nodeModulesDir
 
   # get only the directories
