@@ -3,14 +3,15 @@
 [![Dependency Status](https://gemnasium.com/elidoran/node-bonce.png)](https://gemnasium.com/elidoran/node-bonce)
 [![npm version](https://badge.fury.io/js/bonce.svg)](http://badge.fury.io/js/bonce)
 
-Browserify npm modules once for a Meteor package. Avoids a published package wasting resources rebrowserifying a file for an app during development.
+Browserify npm modules once for a Meteor package. Avoids a published package rebrowserifying a file which is always the same because the npm modules are set at a fixed version. It generates the file for the package and makes that one file part of the published package so it is never rebuilt.
 
-When I made the Meteor build plugin *cosmos:browserify* I expected it to make the browserifyied file during package publishing and then just *use it* for an app. Instead, published packages retain their originals and build along with the app they're added to (there are benefits to this).
+When I made the Meteor build plugin *cosmos:browserify* I expected it to make the browserified file during package publishing and then just *use it* for an app. Instead, published packages retain their originals and build along with the app they're added to (there are benefits to this, just not for this use case).
 
 This cli tool makes it easy to generate a browserified file for a package to use without rebuilds. When you want to update it, you use *npm* to update the modules and then rerun *bonce* to generate a new file. Then, publish a new version of your package which has the new file.
 
-Although Meteor's 1.2 Build API provides a caching feature which avoids many browserify operations this cli makes it possible to avoid 100% of *rebrowserifying*.
+Although Meteor's 1.2 Build API provides a caching feature which avoids many browserify operations this cli makes it possible to avoid 100% of *rebrowserifying*. When a package is added to an app via `meteor add user:package` it will contain the already browserified file and will never be rebuilt.
 
+Note: It's possible to learn to use the Browserify CLI directly and do all this, and more, with it. I'm making *bonce* function specifically for making a file for a Meteor package with reasonable (helpful) defaults. For common simple use it only requires you type *bonce* and then add the resulting file to your *package.js* file.
 
 ## Install
 
@@ -49,7 +50,7 @@ All options are optional and the order you specify them is irrelevant.
 
 #### Command Options: Ordering
 
-The order doesn't matter. Only one option is a directory, two are JS files, but, one should have *browserify.js* in its tail, one is a JSON file, and the others are module names (or the `not` inverter).
+The order doesn't matter because it can figure them out by looking at them. Only one option is a directory, two are JS files, but, the input file should have *browserify.js* in its tail, one is a JSON file, and the others are module names (or the `not` inverter).
 
 
 #### Command Options: Root Directory (basedir)
@@ -61,19 +62,21 @@ By default, *bonce* uses the present working directory, '.', as the basedir.
 
 #### Command Options: Input File
 
+You can avoid providing an input file. Read on, and, read [Specifying Modules](#command-options-specifying-modules).
+
+By default, *bonce* will look for an input file at *node_modules/browserify.js*. So, when the input file has that name it doesn't need to be specified on the command line or in the options file.
+
 The *cosmos:browserify* build tool expects an input file where variables and require statements are specified. This is passed to Browserify as the *entry file*. Although this is possible with *bonce* it can be avoided.
 
 1. by default each installed module will be required and assigned to a variable created from the module's name. It will remove invalid characters from the module name and convert to camel case. For example, module *upper-case* becomes `upperCase`.
 2. you may specify the name of the variable by naming the module to require in the command, or the options file. Put a `#` symbol after the name of the module and then the name of the variable. For example, to require the *upper-case* module and assign it to a variable named `toUpperCase` use: `upper-case#toUpperCase`.
 
-If you still want to specify an input file simply put the path to the file in the command, or options file, and ensure the name ends with 'browserify.js' (that can be the whole name). If you want the file to be in your Meteor package (makes sense) then hide it from the Meteor build tool by placing the file inside the top of *node_modules* directory.
-
-By default, *bonce* will look for an input file at *node_modules/browserify.js*.
-
-To avoid requiring you to write *node_modules/* it will search for the specified input file in *node_modules*, as well as using the path you specify as is. Of course, name the file to match the default and you won't need to specify it at all.
+If you still want to specify an input file simply put the path to the file in the command, or options file, and ensure the name ends with 'browserify.js' (that can be the whole name). If you want the file to be in your Meteor package directory (makes sense) then it must be hidden from the Meteor build tool by placing the file inside the top of *node_modules* directory.
 
 
 #### Command Options: Output File
+
+This is the browserified result to add to your *package.js* file.
 
 By default, the browserified result is written to a file at `<basedir>/package.browserified.js`.
 
@@ -82,20 +85,13 @@ Or, specify its name and where to put it in the command or the options file with
 
 #### Command Options: Options File
 
-To provide advanced options, and make the command easily repeatable, you may specify an options file.
+To provide advanced options, and make the command easily repeatable as just *bonce*, you may specify an options file.
 
-By default, *bonce* will look for an options file at *node_modules/options.json*
+By default, *bonce* will look for an options file at `node_modules/options.json`.
 
 Placing the options file in your package will cause Meteor's build tool to complain about its existence. A simple workaround for that is to place the options file in the root of the *node_modules* directory. Meteor ignores that directory and the file being there won't affect npm using the *node_modules* directory.
 
-The options file is a JSON file. When you provide a path to a JSON file to the *bonce* command it assumes that is your options file.
-
-To avoid requiring you to write *node_modules/* it will search for the options file in there, as well as using the path you specify as is. For example, these two commands are equivalent:
-
-```sh
-bonce options.json
-bonce node_modules/options.json
-```
+The options file is a JSON file. The *bonce* command assumes a path to a JSON file is the options file.
 
 
 #### Command Options: Specifying Modules
