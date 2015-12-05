@@ -17,7 +17,7 @@ module.exports = (op, info) -> #include, exin, inputFileName, optionsFile
           output: #{op.outputFile}
          options: #{info.optionsFile ? '<none>'}
       transforms: #{(t.name for t in op.transforms)}
-        map path: #{op.mapPath}
+        map path: #{if op.map? then op.mapPath else '<no map>'}
          #{includeLabel}: #{exinValue}
     -----------------------------------------------------------------
     """
