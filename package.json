@@ -8,9 +8,9 @@
   "license": "MIT",
   "scripts": {
     "compile": "coffee --bare --compile lib bin",
-    "clean": "rm -rf lib/*.js bin/command.js bin/op-create.js",
+    "clean": "rm -rf lib/*.js bin/command.js bin/op/*.js",
     "prepublish": "coffee --bare --compile lib bin",
-    "postpublish": "rm -rf lib/*.js bin/command.js bin/op-create.js",
+    "postpublish": "rm -rf lib/*.js bin/command.js bin/op/*.js",
     "test": "mocha --compilers coffee:coffee-script/register --reporter spec --bail --check-leaks test/lib test/bin"
   },
   "repository": {
