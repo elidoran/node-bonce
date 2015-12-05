@@ -123,14 +123,6 @@ bonce outputs the options it's using and a success message unless you specify `q
 When bonce generates an input file for Browserify you may want to see it. Specify the option (-g, --showgen) and bonce will print it out to the console for you.
 
 
-#### Command Options: Directly passing options to Browserify cli
-
-*bonce* will pass all arguments after *--* to the Browserify cli. For example, telling it to use transform *foo*:
-
-```sh
-bonce -- -r some-module -t some-transform
-```
-
 
 ## Why name it bonce ?
 
