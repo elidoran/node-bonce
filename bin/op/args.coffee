@@ -12,8 +12,11 @@ module.exports = (op, info, options) ->
 
   for arg in args # look at each arg and decide what to do with it
 
+    # stop when we see --
+    if '--' is arg then break
+    
     # if it's an existing directory then it's our basedir
-    if isDir arg then op.options.basedir = arg
+    else if isDir arg then op.options.basedir = arg
 
     # if it's a file ending with 'browserify.js' then it's the input file
     else if arg[-13...] is 'browserify.js'
