@@ -7,9 +7,8 @@ showOpInfo              = require './printout'
 module.exports = (options) ->
 
   op = # start with some default info
-    options: basedir:'.', debug:true
+    options: basedir:'.', debug:false
     transforms: []
-    #require: []
     quiet: false
 
   info = # defined when a module name is specified, true, or false when `not`
