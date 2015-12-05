@@ -1,0 +1,32 @@
+{
+  "name": "bonce",
+  "version": "0.1.0",
+  "description": "Browserify npm modules once for a Meteor package.",
+  "main": "lib",
+  "bin": "bin/bonce.js",
+  "author": "Eli Doran <eli+npm@elidoran.com>",
+  "license": "MIT",
+  "scripts": {
+    "compile": "coffee --bare --compile lib bin",
+    "clean": "rm -rf lib/*.js bin/command.js bin/op-create.js",
+    "prepublish": "coffee --bare --compile lib bin",
+    "postpublish": "rm -rf lib/*.js bin/command.js bin/op-create.js",
+    "test": "mocha --compilers coffee:coffee-script/register --reporter spec --bail --check-leaks test/lib test/bin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/elidoran/node-bonce.git"
+  },
+  "bugs": "http://github.com/elidoran/node-bonce/issues",
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "mocha": "^2.3.4",
+    "nave": "^0.5.3"
+  },
+  "dependencies": {
+    "browserify": "^12.0.1",
+    "exorcist-stream": "^0.4.0",
+    "strip-json-comments": "^2.0.0",
+    "strung": "^1.0.4"
+  }
+}
