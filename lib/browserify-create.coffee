@@ -3,7 +3,8 @@ module.exports = (op) ->
   # create a Browserify instance with the input file and options
   browserify = require('browserify') op.inputFile, op.options
 
-  # NOTE: apply ignore/exclude/external options too?
+  # TODO: apply ignore/exclude/external options
+
   # apply transforms from `op`
   for transform in op.transforms
     browserify.transform transform.name, transform.options
