@@ -1,5 +1,14 @@
 An example of a Meteor package using a provided input file.
 
+Run this example:
+
+```
+git clone git@github.com:elidoran/node-bonce.git
+cd node-bonce/examples/with-input
+npm install upper-case
+bonce
+```
+
 Note:
 
 1. I used `npm install upper-case' to install the module into a *node_modules* directory. This module will be included in the browserified file by default. Meteor's build tool ignores the *node_modules* directory.
