@@ -25,12 +25,8 @@ commands['-m'] = commands['--map']
 module.exports = (op, info, options) ->
 
   # ignore the first arg, it's the runner or the script
-  args = options?.args ? process.argv[1..]
-
-  # explicitly ignore first args which are an executable or the command script
-  # Note: for running it during dev as: coffee bin/bonce.js
-  while args?[0]? and (args[0] in ['node', 'coffee'] or args[0][-8..] is 'bonce.js')
-    args.shift()
+  # ignore the second arg, it's the script
+  args = options?.args ? process.argv[2..]
 
   for arg in args # look at each arg and decide what to do with it
 
