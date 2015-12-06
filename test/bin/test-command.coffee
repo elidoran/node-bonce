@@ -19,10 +19,6 @@ describe 'test command', ->
       assert.equal fs.existsSync(file), true, "should have written `#{file}`"
       fs.unlinkSync file
 
-      file = 'package.browserified.js.map'
-      assert.equal fs.existsSync(file), true, "should have written `#{file}`"
-      fs.unlinkSync file
-
       process.chdir cwd
 
       done()
@@ -43,10 +39,6 @@ describe 'test command', ->
       if error? then return done error
 
       file = join basedir, 'package.browserified.js'
-      assert.equal fs.existsSync(file), true, "should have written `#{file}`"
-      fs.unlinkSync file
-
-      file = join basedir, 'package.browserified.js.map'
       assert.equal fs.existsSync(file), true, "should have written `#{file}`"
       fs.unlinkSync file
 
