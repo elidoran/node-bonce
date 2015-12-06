@@ -6,8 +6,10 @@ handleError = (error, options) ->
 
 module.exports = (op, options) ->
 
+  # if an error occurred somewhere along the way then report it and return
   if op.error? then return handleError op.error, options
 
+  # if we make it this far, we'll need these
   strung = require('strung')
   fs = require 'fs'
 

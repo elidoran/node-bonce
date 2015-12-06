@@ -8,12 +8,11 @@ module.exports = (options) ->
 
   op = # start with some default info
     options: basedir:'.', debug:false
-    transforms: []
     quiet: false
 
   info = # defined when a module name is specified, true, or false when `not`
     include: undefined
-    exin: {} # hold excluded/included modules
+    exin: [] # hold excluded/included module refs
 
   # look at process's args and generate op and info values
   processArgs op, info, options

@@ -16,7 +16,7 @@ module.exports = (op, info) -> #include, exin, inputFileName, optionsFile
            input: #{info.inputFileName ? '<generated>'}
           output: #{op.outputFile}
          options: #{info.optionsFile ? '<none>'}
-      transforms: #{(t.name for t in op.transforms)}
+      transforms: #{((t.name ? t) for t in op.transform)}
         map path: #{if op.map? then op.mapPath else '<no map>'}
          #{includeLabel}: #{exinValue}
     -----------------------------------------------------------------

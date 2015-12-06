@@ -5,7 +5,7 @@ commands = # some static value args
   '--quiet' : (op) -> op.quiet = true
 
   # showgen means write out the generated input file, if there is one
-  '-showgen': (op) -> op.showGeneratedInput = true
+  '--showgen': (op) -> op.showGeneratedInput = true
 
   # dryrun means we don't do the browserifying, but, we output the options
   # and the generated file (if showgen is also set).
@@ -42,8 +42,9 @@ module.exports = (op, info, options) ->
 
     # if it's a file ending with 'browserify.js' then it's the input file
     else if arg[-13...] is 'browserify.js'
-      info.inputFileName = arg # remember this for outputting to the console
-      op.inputFile = fs.createReadStream arg
+      # set into `info` for outputting to the console
+      # set into `op` for actual use
+      op.inputFile = info.inputFileName = arg
 
     # if it's a file ending with '.js' then it's the output file
     else if arg[-3...] is '.js' then op.outputFile = arg
@@ -59,13 +60,7 @@ module.exports = (op, info, options) ->
       # optional because if we saw `not` then it's false already
       info.include ?= true
 
-      # split off the variable name from the end, if it's there
-      split = arg.split '#'
-
-      # if there are slashes (a path into the module) get the first part as the name
-      moduleName = split[0].split(/\\|\//)[0]
-
-      # store in `exin` to use when generating input, and outputting info to console
-      info.exin[moduleName] = path:split[0], varName:split?[1]
+      # store in `exin` to process for generating input
+      info.exin.push arg
 
   return
