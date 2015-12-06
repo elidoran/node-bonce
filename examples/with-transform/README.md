@@ -6,7 +6,7 @@ Run this example:
 git clone git@github.com:elidoran/node-bonce.git
 cd node-bonce/examples/with-transform
 npm install upper-case envify uglifyify
-bonce
+NODE_ENV=production bonce
 ```
 
 Note:
