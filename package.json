@@ -1,6 +1,6 @@
 {
   "name": "bonce",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Browserify npm modules once for a Meteor package.",
   "main": "lib",
   "bin": "bin/bonce.js",
