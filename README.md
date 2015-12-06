@@ -40,6 +40,10 @@ bonce
 bonce . package.browserified.js node_modules/options.json some-module#someModule another-module#anotherModule
 ```
 
+## Examples
+
+Check out the [example packages](https://github.com/elidoran/node-bonce/tree/master/examples) to see Meteor packages using *bonce*.
+
 
 ## Command:
 
@@ -93,6 +97,8 @@ Placing the options file in your package will cause Meteor's build tool to compl
 
 The options file is a JSON file. The *bonce* command assumes a path to a JSON file is the options file.
 
+Look at the [with-options](https://github.com/elidoran/node-bonce/tree/master/examples/with-options) example package using an options file.
+
 
 #### Command Options: Specifying Modules
 
@@ -122,6 +128,12 @@ bonce outputs the options it's using and a success message unless you specify `q
 
 When bonce generates an input file for Browserify you may want to see it. Specify the option (-g, --showgen) and bonce will print it out to the console for you.
 
+
+#### Command Options: Dry Run
+
+Specify `--dryrun` and *bonce* will not perform the browserify operation. It will output the options it has, unless the *quiet* option is specified. This helps to test what options *bonce* will use.
+
+You may also set `--showgen` (or -g) to see the generated input file.
 
 
 ## Why name it bonce ?
