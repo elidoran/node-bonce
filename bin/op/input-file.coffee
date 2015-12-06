@@ -33,7 +33,7 @@ convertExin = (exinArray) ->
 checkDefaultLocation = (op, info) ->
   # generate the default location based on the basedir
   inputFile = join op.options.basedir, 'node_modules', 'browserify.js'
-  console.log 'default location:',inputFile
+
   # if it exists then put it in the op
   if fs.existsSync inputFile then info.inputFileName = op.inputFile = inputFile
 
@@ -131,7 +131,7 @@ ensureFileExists = (op, info) ->
   return
 
 module.exports = (op, info) ->
-  console.log 'input file:',op.inputFile
+  
   unless op.inputFile? then checkDefaultLocation op, info
 
   unless op.inputFile? then generateInput op, info
