@@ -13,6 +13,8 @@ Although Meteor's 1.2 Build API provides a caching feature which avoids many bro
 
 Note: It's possible to learn to use the Browserify CLI directly and do all this, and more, with it. I'm making *bonce* function specifically for making a file for a Meteor package with reasonable (helpful) defaults. For common simple use it only requires you type *bonce* and then add the resulting file to your *package.js* file.
 
+[[Some Future Plans]](https://github.com/elidoran/node-bonce/blob/master/docs/TODO.md)
+
 ## Install
 
 ```sh
