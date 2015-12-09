@@ -1,7 +1,5 @@
-pwd
-
+mkdir test/helpers/module-only
 cd test/helpers/module-only
-pwd
 npm install upper-case
 
 cd ../with-input
