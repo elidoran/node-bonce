@@ -9,8 +9,9 @@ describe 'test command', ->
   it 'with defaults', (done) ->
 
     cwd = process.cwd()
-
-    process.chdir join 'test', 'helpers', 'module-only'
+    moduleOnlyDir = resolve 'test', 'helpers', 'module-only'
+    console.log "cwd = [#{cwd}]  chdir = [#{moduleOnlyDir}]"
+    process.chdir moduleOnlyDir
 
     check = (error) ->
       if error? then return done error
